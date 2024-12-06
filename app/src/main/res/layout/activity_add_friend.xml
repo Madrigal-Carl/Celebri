@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/signup_bg"
+    android:padding="35dp"
+    tools:context=".AddFriendActivity">
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:fontFamily="@font/rubik_medium"
+        android:text="Add\nBirthdays"
+        android:textColor="@color/bold_text"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Mayreen S. Vitto"
+        android:background="@android:drawable/editbox_background"
+        android:fontFamily="@font/rubik"
+        android:padding="13dp"
+        android:textColor="@color/regular_text"
+        android:textColorHint="@color/hint"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <EditText
+        android:id="@+id/bday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="date"
+        android:maxLength="10"
+        android:hint="MM/DD/YYYY"
+        android:background="@android:drawable/editbox_background"
+        android:fontFamily="@font/rubik"
+        android:padding="13dp"
+        android:textColor="@color/regular_text"
+        android:textColorHint="@color/hint"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+    <EditText
+        android:id="@+id/fav_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Iphone 16 Pro Max (Optional)"
+        android:background="@android:drawable/editbox_background"
+        android:fontFamily="@font/rubik"
+        android:padding="13dp"
+        android:textColor="@color/regular_text"
+        android:textColorHint="@color/hint"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/add_birthdayBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/main_button"
+        android:fontFamily="@font/rubik_semibold"
+        android:text="Add Birthday"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/cancelBtn"
+        app:layout_constraintEnd_toEndOf="@+id/fav_item"
+        app:layout_constraintStart_toStartOf="@+id/fav_item" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/cancelBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/return_button"
+        android:fontFamily="@font/rubik_semibold"
+        android:text="Cancel"
+        android:textAllCaps="false"
+        android:textColor="#A8A8A8"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/add_birthdayBtn"
+        app:layout_constraintStart_toStartOf="@+id/add_birthdayBtn" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="Name"
+        android:fontFamily="@font/rubik_medium"
+        android:textColor="@color/regular_text"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Birthday"
+        android:fontFamily="@font/rubik_medium"
+        android:textColor="@color/regular_text"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/name"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Favorite Item"
+        android:fontFamily="@font/rubik_medium"
+        android:textColor="@color/regular_text"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/bday"
+        app:layout_constraintTop_toBottomOf="@+id/bday" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Celebri</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="about_app">"Never miss a special moment again with Celebri, your ultimate birthday companion! Stay connected with the people who matter most—be it your best friend, a cherished loved one, or someone you admire. Celebri makes it effortless to record, organize, and track birthdays in one simple, convenient place. With timely reminders tailored to your needs, you'll always be ready to celebrate their special day with heartfelt wishes, thoughtful gestures, or even that perfect surprise. Let Celebri keep you close to the ones you care about, ensuring no birthday is ever forgotten!"</string>
+</resources>
