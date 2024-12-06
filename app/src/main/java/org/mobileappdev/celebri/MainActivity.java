@@ -22,10 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
     FloatingActionButton add;
     RecyclerView recyclerView;
-    private ArrayList<String> name;
-    private ArrayList<String> age;
-    private ArrayList<String> bday;
-    private ArrayList<String> favoriteItems;
+    private ArrayList<String> name, age, bday, favoriteItems;
+    private ArrayList<Integer> friendIds;
 
     BirthdayRecordAdapter birthdayRecordAdapter;
     DatabaseHelper db;
@@ -46,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         age = new ArrayList<>();
         bday = new ArrayList<>();
         favoriteItems = new ArrayList<>();
+        friendIds = new ArrayList<>();
 
         birthdayRecordAdapter = new BirthdayRecordAdapter(
                 this,
@@ -53,7 +52,9 @@ public class MainActivity extends AppCompatActivity {
                 name,
                 age,
                 bday,
-                favoriteItems
+                favoriteItems,
+                db,
+                friendIds
         );
         recyclerView.setAdapter(birthdayRecordAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -78,12 +79,14 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "No friends found", Toast.LENGTH_SHORT).show();
         } else {
             while (cursor.moveToNext()) {
+                int friendId = cursor.getInt(cursor.getColumnIndexOrThrow("friend_id"));
                 String friendName = cursor.getString(cursor.getColumnIndexOrThrow("name"));
                 String friendBday = cursor.getString(cursor.getColumnIndexOrThrow("birthday"));
                 String favoriteItem = cursor.getString(cursor.getColumnIndexOrThrow("item"));
 
                 int turningAge = getTurningAge(friendBday);
 
+                friendIds.add(friendId);
                 name.add(friendName);
                 age.add(String.valueOf(turningAge));
                 bday.add(friendBday);

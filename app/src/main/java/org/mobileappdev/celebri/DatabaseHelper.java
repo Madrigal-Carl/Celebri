@@ -207,16 +207,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getAllFriendInformation(int userId) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String query = String.format("SELECT f.%s, f.%s, fav.%s " +
+        String query = String.format("SELECT f.%s, f.%s, f.%s, fav.%s " +
                         "FROM %s f " +
                         "JOIN %s fav ON f.%s = fav.%s " +
                         "WHERE f.%s = ?",
-                COLUMN_FRIEND_NAME, COLUMN_BIRTHDAY, COLUMN_ITEM,
+                COLUMN_FRIEND_ID, COLUMN_FRIEND_NAME, COLUMN_BIRTHDAY, COLUMN_ITEM,
                 TABLE_FRIENDS, TABLE_FAVORITES,
                 COLUMN_FRIEND_ID, COLUMN_FAVORITE_FRIEND_ID,
                 COLUMN_FRIEND_USER_ID);
 
         return db.rawQuery(query, new String[]{String.valueOf(userId)});
+    }
+
+    public boolean deleteFriend(int friendId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result = db.delete(TABLE_FRIENDS, COLUMN_FRIEND_ID + "=?", new String[]{String.valueOf(friendId)});
+        db.close();
+        return result > 0;
     }
 
 }
