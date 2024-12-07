@@ -10,4 +10,8 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="about_app">"Never miss a special moment again with Celebri, your ultimate birthday companion! Stay connected with the people who matter most—be it your best friend, a cherished loved one, or someone you admire. Celebri makes it effortless to record, organize, and track birthdays in one simple, convenient place. With timely reminders tailored to your needs, you'll always be ready to celebrate their special day with heartfelt wishes, thoughtful gestures, or even that perfect surprise. Let Celebri keep you close to the ones you care about, ensuring no birthday is ever forgotten!"</string>
+    <string name="developer1_description">"Hi, It's Mayreen I'm a Frontend Developer, BSI/T - 3D"</string>
+    <string name="developer2_description">"Hi, It's Jhonrick I'm a Web Developer, BSI/T - 3D"</string>
+    <string name="developer3_description">"Hi, It's Ashley I'm a Frontend Developer and Layout Editor, BSI/T 3F"</string>
 </resources>
+

@@ -34,7 +34,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_ITEM = "item";
     private static final String COLUMN_ADDED_DATE = "added_date";
 
-
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
@@ -70,7 +69,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "CREATE TABLE %s (" +
                         "%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "%s INTEGER NOT NULL, " +
-                        "%s VARCHAR(100) DEFAULT 'None', " +
+                        "%s VARCHAR(100) NOT NULL, " +
                         "%s DATE DEFAULT (CURRENT_DATE), " +
                         "FOREIGN KEY(%s) REFERENCES %s(%s) ON DELETE CASCADE)",
                 TABLE_FAVORITES, COLUMN_FAVORITE_ID, COLUMN_FAVORITE_FRIEND_ID, COLUMN_ITEM, COLUMN_ADDED_DATE,
@@ -189,6 +188,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 return false;
             }
 
+            if (item == null || item.trim().isEmpty()) {
+                item = "None";
+            }
+
             ContentValues favoriteValues = new ContentValues();
             favoriteValues.put(COLUMN_FAVORITE_FRIEND_ID, friendId);
             favoriteValues.put(COLUMN_ITEM, item);
@@ -207,14 +210,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getAllFriendInformation(int userId) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String query = String.format("SELECT f.%s, f.%s, f.%s, fav.%s " +
+        String query = String.format(
+                "SELECT f.%s, f.%s, f.%s, fav.%s " +
                         "FROM %s f " +
                         "JOIN %s fav ON f.%s = fav.%s " +
-                        "WHERE f.%s = ?",
+                        "WHERE f.%s = ? " +
+                        "ORDER BY " +
+                        "CASE " +
+                        "   WHEN (CAST(substr(f.%s, 1, 2) AS INTEGER) > strftime('%%m', 'now') OR " +
+                        "        (CAST(substr(f.%s, 1, 2) AS INTEGER) = strftime('%%m', 'now') AND " +
+                        "         CAST(substr(f.%s, 4, 2) AS INTEGER) >= strftime('%%d', 'now'))) " +
+                        "   THEN 1 ELSE 2 END, " +
+                        "CAST(substr(f.%s, 1, 2) AS INTEGER), CAST(substr(f.%s, 4, 2) AS INTEGER)",
                 COLUMN_FRIEND_ID, COLUMN_FRIEND_NAME, COLUMN_BIRTHDAY, COLUMN_ITEM,
                 TABLE_FRIENDS, TABLE_FAVORITES,
                 COLUMN_FRIEND_ID, COLUMN_FAVORITE_FRIEND_ID,
-                COLUMN_FRIEND_USER_ID);
+                COLUMN_FRIEND_USER_ID,
+                COLUMN_BIRTHDAY, COLUMN_BIRTHDAY, COLUMN_BIRTHDAY,
+                COLUMN_BIRTHDAY, COLUMN_BIRTHDAY
+        );
 
         return db.rawQuery(query, new String[]{String.valueOf(userId)});
     }

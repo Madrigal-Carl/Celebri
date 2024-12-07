@@ -7,7 +7,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -62,9 +66,16 @@ public class MainActivity extends AppCompatActivity {
         add.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AddFriendActivity.class);
             startActivity(intent);
+            finish();
         });
 
         displayFriendsInfo();
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(true);
+            getSupportActionBar().setElevation(0);
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FF8383")));
+        }
     }
 
     public void displayFriendsInfo() {
@@ -76,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         Cursor cursor = db.getAllFriendInformation(pref.getUserId());
 
         if (cursor.getCount() == 0) {
-            Toast.makeText(this, "No friends found", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Add a friend to your list", Toast.LENGTH_SHORT).show();
         } else {
             while (cursor.moveToNext()) {
                 int friendId = cursor.getInt(cursor.getColumnIndexOrThrow("friend_id"));
@@ -123,6 +134,39 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
             return 0;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_actionbar, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.about_id) {
+            Intent intent = new Intent(this, AboutActivity.class);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.developers_id) {
+            Intent intent = new Intent(this, DevelopersActivity.class);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.log_out_id) {
+            new AlertDialog.Builder(this)
+                    .setMessage("Are you sure you want to log out?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        pref.clearUserData();
+                        Intent intent = new Intent(this, SigninActivity.class);
+                        startActivity(intent);
+                        finish();
+                    })
+                    .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
+                    .show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
